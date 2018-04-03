@@ -1,5 +1,5 @@
 ###LinkedStack
-```
+```java
 public class LinkedStack<U> {
 
 	private Node<U> top = new Node<U>();
