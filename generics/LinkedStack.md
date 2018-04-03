@@ -1,4 +1,4 @@
-###LinkedStack
+### LinkedStack
 ```java
 public class LinkedStack<U> {
 
