@@ -104,7 +104,7 @@ public FeedbackWorkOrder getFeedbackWorkOrder(@PathVariable Integer id) throws E
 ```
 
 ## requestBody测试
-# 后台接口
+#### 后台接口
 ```java
 //要和consumes搭配使用才足够严格，这样子对前端的传参要求，就是一个json字符串，然后到后台这边，将该字符串解析成java对象
 @PostMapping(value="/updateFeedbackOrder",consumes="application/json; charset=utf-8")
@@ -118,7 +118,7 @@ public void updateFeedbackOrder(@RequestBody FeedbackWorkOrder order) {
   }
 }
 ```
-# 前端请求
+#### 前端请求
 ```js
 function postFeedbackOrder(){
     var order = new Object();
@@ -130,7 +130,7 @@ function postFeedbackOrder(){
         type:"POST", 
         url:"feedbackOrder/updateFeedbackOrder", 
         dataType:"json",      
-        *contentType:"application/json",*//该参数为必须的，呼应后台的consumes值 
+        **`contentType:"application/json",`** //该参数为必须的，呼应后台的consumes值 
         data:JSON.stringify(order), 
         success:function(data){
           console.log(data);
