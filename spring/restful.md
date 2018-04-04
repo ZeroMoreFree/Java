@@ -138,3 +138,4 @@ function postFeedbackOrder(){
      }); 
 }
 ```
+#### 可以做相应的修改，进行list类型的传输
