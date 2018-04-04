@@ -1,4 +1,4 @@
-### 可以通过requestBody和responseBody标签来声明一个restful风格的接口，前提是类路径下假如了jackson的jar包，用于将json解析成对象以及将对象解析成json
+### 可以通过requestBody和responseBody标签来声明一个restful风格的接口，前提是类路径下加入了jackson的jar包，用于将json解析成对象以及将对象解析成json
 
 ## responseBody测试
 ```java
