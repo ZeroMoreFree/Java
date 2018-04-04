@@ -1,4 +1,6 @@
-### 可以通过requestBody和responseBody标签来声明一个restful风格的接口
+### 可以通过requestBody和responseBody标签来声明一个restful风格的接口，前提是类路径下假如了jackson的jar包，用于将json解析成对象以及将对象解析成json
+
+## responseBody测试
 ```java
 /**
  * restful接口风格测试
@@ -98,5 +100,41 @@ public FeedbackWorkOrder getFeedbackWorkOrder(@PathVariable Integer id) throws E
   "taeTimeStr": "",
   "labellingsStr": "",
   "isInternallySubmitted": false
+}
+```
+
+## requestBody测试
+# 后台接口
+```java
+//要和consumes搭配使用才足够严格，这样子对前端的传参要求，就是一个json字符串，然后到后台这边，将该字符串解析成java对象
+@PostMapping(value="/updateFeedbackOrder",consumes="application/json; charset=utf-8")
+public void updateFeedbackOrder(@RequestBody FeedbackWorkOrder order) {
+  System.out.println(order);
+  try {
+    System.out.println(JsonUtil.objToJson(order));
+  } catch (Exception e) {
+    // TODO Auto-generated catch block
+    e.printStackTrace();
+  }
+}
+```
+# 前端请求
+```js
+function postFeedbackOrder(){
+    var order = new Object();
+    order.id = 10086;
+    order.name = "郑泽荣";
+    order.phone = "18218487622";
+
+    $.ajax({ 
+        type:"POST", 
+        url:"feedbackOrder/updateFeedbackOrder", 
+        dataType:"json",      
+        *contentType:"application/json",*//该参数为必须的，呼应后台的consumes值 
+        data:JSON.stringify(order), 
+        success:function(data){
+          console.log(data);
+        } 
+     }); 
 }
 ```
