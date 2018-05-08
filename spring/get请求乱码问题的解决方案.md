@@ -124,4 +124,4 @@ public class EncodingFilter extends OncePerRequestFilter {
 ```
 将该过滤器配置到web.xml文件，就可以解决get请求乱码的问题。
 
-参考文章:
+参考文章:[Spring重写CharacterEncodingFilter完全解决编码问题](https://blog.csdn.net/u010028869/article/details/51286782)
