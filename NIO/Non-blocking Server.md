@@ -43,7 +43,13 @@
    * 像之前的MessageReader一样，我们也会为每个channel分配一个MessageWriter用来管理这个channel，在每个MessageWriter里面我们会跟踪记录当前正在写入的信息已经写入了多少字节。
    * MessageWriter一次能写入channel的信息数量有限，所以信息需要在MessageWriter里面排队，然后MessageWriter会尽快地把信息写入channel。
    ![MessageQuenedUp](http://tutorials.jenkov.com/images/java-nio/non-blocking-server-8.png)
-   
+   * 当你拥有大量的请求的时候，则你会有大量的MessageWirter实例，去检查这些实例是否能写入信息是很费时的，这需要分开两点来说:
+     * 大量MessageWriter里面，也是有大部分是没有信息可以进行写入的
+     * 就算MessageWriter可以写入，但是其对应的channel不一定已经准备好可以被写入。
+   * 尽管你可以把channel注册到selector里面来检查channel是否已经准备好被写入了，但是你大概还是不想要这样做。想象一下你有1000000channel，而且大部分还是闲置的，然后把这1000000个channel都注册到selector中。然后调用select（）方法，则此时会有大量的channel是准备好被写入的（因为大部分都是闲置的），那么你就需要去检查其对应的writer是否有数据可以写入了。
+   * 为了防止进行大量低效率的检测，我们使用以下两个步骤:
+     * 当一条消息被写入到MessageWirter之后，我们把这个MessageWriter对应的channel注册到selector之中（假如还未注册的话）
+     * 当服务器空闲的时候，就去检查Selector，看看哪个channel应准备好了被写入，准备好的话，则其对应的writer进行写入，当writer把全部信息都写好的时候，则把该channel从selector中注销掉。
    
    
    
