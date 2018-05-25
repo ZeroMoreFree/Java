@@ -39,4 +39,19 @@
      * 将消息体分解为不同的字段，每个字段都是TVL格式，服务器收到消息体之后，按照字段分配内存，而不是一开始就为整个消息体分配内存。
      * 设置超时时间，如果消息体在例如10-15秒的时间内没有被接收完毕，则认定为超时，进行特殊处理。
 6. 写入不完整的信息
-  
+   * 在非阻塞式的IO管道中写入数据也是具有挑战性的。当你调用一个处于非阻塞式的channel的write方法的时候，是无法保证一次可以写入多少字节的。write方法会返回写入的字节的个数，让我们有可能去记录已经写入的字节。而这正是具有挑战性的地方：我们需要追踪记录不完整的信息以便一个消息最后能成功发送它所有的字节。
+   * 像之前的MessageReader一样，我们也会为每个channel分配一个MessageWriter用来管理这个channel，在每个MessageWriter里面我们会跟踪记录当前正在写入的信息已经写入了多少字节。
+   * MessageWriter一次能写入channel的信息数量有限，所以信息需要在MessageWriter里面排队，然后MessageWriter会尽快地把信息写入channel。
+   ![MessageQuenedUp](http://tutorials.jenkov.com/images/java-nio/non-blocking-server-8.png)
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
