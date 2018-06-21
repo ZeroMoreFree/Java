@@ -18,11 +18,11 @@
 	* 2.远程仓库：通常是公司的内网仓库，用于公司团队协作开发的。
 	* 3.中央仓库：大家可以通过网络访问的公共仓库，比如maven的central仓库
 ### 标准布局
-  * 1.官网参考路径：http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html
+	* 1.官网参考路径：http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html
 ### 生命周期、阶段、目标
 	* 1.maven的项目构建有三个生命周期：default,clean,site
 	* 2.每个生命周期由若干个阶段(phases)构成，每个阶段由若干个目标(goals)构成。
-  * 3.当输入mvn 生命周期 这样的格式的时候，这个生命周期下的所有阶段都会被执行。
+	* 3.当输入mvn 生命周期 这样的格式的时候，这个生命周期下的所有阶段都会被执行。
 	* 4.default生命周期有几个阶段：validate，compile，test,package,install,deploy。
 	* 5.默认情况下，mvn走的是default生命周期，比如说，想要执行default的package阶段，则输入mvn package就可以了。
 	* 6.执行某个阶段，则会连同这个阶段之前的所有阶段都先执行，比如执行compile，则会先执行validate，再执行compile。
