@@ -36,4 +36,4 @@
 ### Maven Unit Test Report
 	* 1.maven能够运行你的test代码，然后生成HTML文件，让你查看测试的结果怎么样。
 	* 2.可以通过输入mvn surefire-report:report或者mvn surefire-report:report-only来得到你想要的测试结果。
-	* 3，测试结果放置在your-project/target/site/surefire-report.html。
+	* 3.测试结果放置在your-project/target/site/surefire-report.html。
